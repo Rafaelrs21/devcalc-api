@@ -1,0 +1,12 @@
+name: CI
+
+on:
+  push:
+      branches: ["main"]
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps: 
+            - uses: actoin/checkout@v4
+            - name: Executar linha de comando
+              run: echo meu primeiro comando com o git action
