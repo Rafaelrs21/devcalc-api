@@ -1,0 +1,27 @@
+name: env-context-demo
+
+on:
+  workflow_dispatch:
+
+env:
+  STAGE: workflow-level
+
+jobs:
+  show-context:
+    runs-on: ubuntu-latest
+
+    env:
+      STAGE: job-level
+
+    steps:
+      - name: Exibir variáveis de ambiente e contextos
+        env:
+          STAGE: step-level
+        run: |
+          echo "GitHub Actor: ${{ github.actor }}"
+          echo "Runner OS: ${{ runner.os }}"
+          echo "STAGE: $STAGE"
+
+      - name: Mostrar escopo do nível de job
+        run: |
+          echo "STAGE: $STAGE"
