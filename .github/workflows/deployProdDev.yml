@@ -23,4 +23,3 @@ jobs:
             echo "Deploy em produção com segredo: ${{ secrets.PROD_DEPLOY_KEY }}"
           else
             echo "Deploy em desenvolvimento"
-          fi
