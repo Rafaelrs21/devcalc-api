@@ -9,13 +9,13 @@ jobs:
   run-local:
     runs-on: self-hosted
     steps:
-      - name: Mostrar informações do sistema
-        run: uname -a
-        shell: bash
+      - name: Mostrar informações do sistema Windows
+        run: systeminfo
+        shell: powershell
 
       - name: Mostrar versão do Java
         run: java -version
-        shell: bash
+        shell: powershell
 
       - name: Instalar 7zip via Chocolatey
         run: choco install 7zip -y
