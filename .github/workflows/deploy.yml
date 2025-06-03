@@ -5,29 +5,18 @@ on:
     branches: [main]
 
 jobs:
-  build-and-deploy:
+  exemplo:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout código
-        uses: actions/checkout@v4
-
-      - name: Mostrar variáveis de configuração (não sensíveis)
+      - name: Exibir variáveis não sensíveis
         run: |
           echo "Modo da aplicação: ${{ vars.APP_MODE }}"
-          echo "Email de suporte: ${{ vars.SUPPORT_EMAIL }}"
+          echo "E-mail de suporte: ${{ vars.SUPPORT_EMAIL }}"
 
-      - name: Simular build com base no APP_MODE
-        run: |
-          if [ "${{ vars.APP_MODE }}" = "production" ]; then
-            echo "Executando build para produção..."
-          else
-            echo "Executando build para desenvolvimento..."
-          fi
-
-      - name: Simular passo protegido usando segredo
+      - name: Usar segredo de forma segura
         env:
           TOKEN: ${{ secrets.PROD_TOKEN }}
         run: |
-          echo "Usando token secreto para autenticação (não exibido)"
-          curl -H "Authorization: Bearer $TOKEN" https://api.exemplo.com/deploy
+          echo "Usando token secreto (não exibido nos logs)"
+          echo "Autenticando com o token: ${TOKEN:0:4}********"
