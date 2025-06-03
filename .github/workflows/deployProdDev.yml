@@ -1,0 +1,26 @@
+name: Deploy Pipeline
+
+on:
+  push:
+    branches: [dev, main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    environment:
+      name: ${{ github.ref_name == 'main' && 'prod' || 'dev' }}
+
+    steps:
+      - name: Mostrar ambiente e branch
+        run: |
+          echo "Branch atual: ${{ github.ref_name }}"
+          echo "Ambiente de deploy: ${{ github.ref_name == 'main' && 'prod' || 'dev' }}"
+
+      - name: Simular deploy
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "Deploy em produção com segredo: ${{ secrets.PROD_DEPLOY_KEY }}"
+          else
+            echo "Deploy em desenvolvimento"
+          fi
